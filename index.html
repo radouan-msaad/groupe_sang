@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Radouan groupes sanguins</title>
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script type="text/javascript" src="jquery-1.11.3.min.js"></script> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <style type="text/css">
+  body{
+    font-size: 16px;
+  }
+ </style>
+ <script type="text/javascript" charset="utf-8">
+   $(document).ready(function(){
+     var grpP = {
+       "O-":["O-"],
+       "O+":["O-","O+"],
+       "A-":["O-","A-"],
+       "A+":["O-","O+","A-","A+"],
+       "B-":["O-","B-"],
+       "B+":["O-","O+","B-","B+"],
+       "AB-":["O-","A-","B-","AB-"],
+       "AB+":["O-","O+","A-","A+","B-","B+","AB-","AB+"]
+
+       };
+     var grpD = {
+       "O-":["O-","O+","A-","A+","B-","B+","AB-","AB+"],
+       "O+":["O+","A+","B+","AB+"],
+       "A-":["A-","A+","AB-","AB+"],
+       "A+":["A+","AB+"],
+       "B-":["B-","B+","AB-","AB+"],
+       "B+":["B+","AB+"],
+       "AB-":["AB-","AB+"],
+       "AB+":["AB+"]
+         };
+         $(".res").hide();
+         function Classer(){
+           var sang = ($("#sang").val()).toUpperCase();
+           $("#sang").val(sang);
+           if(grpD[sang]){
+           $(".res").show();
+           $(".donner").html(grpD[sang].join(", "));
+           $(".prendre").html(grpP[sang].join(", "));
+         }
+         else
+        $(".res").hide();
+         }
+         $("#sang").keyup(Classer);
+         Classer();
+   });
+ </script>
+ </head>
+ <body>
+ <div class="container col-11 border border-2 shadow mt-5 p-2 ">
+   <form action="" class="was-validated">
+   <div class="form-groupe" >
+      <label for="sang" class="py-2">Le groupe sanguin: </label>
+     <input type="text" class="form-control" id="sang" placeholder="Entrez le groupe sanguin" pattern="([A-Ba-b]|[Oo]){1,2}([\+-])$" value="O-"required>
+     <div class="res alert alert-info my-4 mx-1" >
+       <div class="d text-success ">Donner à : <span class="donner fw-bolde"></span></div>
+       <div class="p text-danger">Prendre de : <span class="prendre fw-bold"></span></div>
+     </div>
+   </div>
+   </form>
+ </div>
+ </body>
+</html>
